@@ -14,10 +14,7 @@ import com.schoolofnet.helpdesk.models.User;
 import com.schoolofnet.helpdesk.repository.RolesRepository;
 import com.schoolofnet.helpdesk.repository.UserRepository;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -28,7 +25,13 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private BCryptPasswordEncoder enconder;
-	
+
+	public UserServiceImpl(UserRepository repository, RolesRepository roleRepository, BCryptPasswordEncoder enconder) {
+		this.repository = repository;
+		this.roleRepository = roleRepository;
+		this.enconder = enconder;
+	}
+
 	@Override
 	public List<User> findAll() {
 		return this.repository.findAll();

@@ -21,11 +21,8 @@ import com.schoolofnet.helpdesk.models.Ticket;
 import com.schoolofnet.helpdesk.services.TicketService;
 import com.schoolofnet.helpdesk.services.UserService;
 
-import lombok.AllArgsConstructor;
-
 @Controller
 @RequestMapping("/tickets")
-@AllArgsConstructor
 public class TicketController {
 	
 	@Autowired
@@ -33,6 +30,11 @@ public class TicketController {
 	
 	@Autowired
 	private UserService userService;
+	
+	public TicketController(TicketService ticketService, UserService userService) {
+		this.ticketService = ticketService;
+		this.userService = userService;
+	}
 	
 	@GetMapping
 	public String index(Model model) {

@@ -18,12 +18,8 @@ import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Entity
 @Table(name = "tickets")
-@Getter @Setter
 public class Ticket {
 	
 	@Id
@@ -65,6 +61,82 @@ public class Ticket {
 	@PrePersist
 	public void prePersiste() {
 		this.setCreated(new Date());
+	}
+	
+	public Ticket() {
+		
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Date getCreated() {
+		return created;
+	}
+
+	public void setCreated(Date created) {
+		this.created = created;
+	}
+
+	public Date getClosed() {
+		return closed;
+	}
+
+	public void setClosed(Date closed) {
+		this.closed = closed;
+	}
+
+	public Boolean getFinished() {
+		return finished;
+	}
+
+	public void setFinished(Boolean finished) {
+		this.finished = finished;
+	}
+
+	public User getUserOpen() {
+		return userOpen;
+	}
+
+	public void setUserOpen(User userOpen) {
+		this.userOpen = userOpen;
+	}
+
+	public User getTechnician() {
+		return technician;
+	}
+
+	public void setTechnician(User technician) {
+		this.technician = technician;
+	}
+
+	public List<Interaction> getInteractions() {
+		return interactions;
+	}
+
+	public void setInteractions(List<Interaction> interactions) {
+		this.interactions = interactions;
 	}
 	
 }

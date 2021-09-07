@@ -17,16 +17,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.schoolofnet.helpdesk.models.Role;
 import com.schoolofnet.helpdesk.services.RoleService;
 
-import lombok.AllArgsConstructor;
-
 @Controller
 @RequestMapping("/roles")
-@AllArgsConstructor
 @PreAuthorize("hasAuthority('ADMIN')")
 public class RoleController {
 
 	@Autowired
 	private RoleService roleService;
+	
+	public RoleController(RoleService roleService) {
+		this.roleService = roleService;
+	}
 	
 	@GetMapping
 	public String  index(Model model) {

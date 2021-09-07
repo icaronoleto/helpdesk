@@ -10,10 +10,7 @@ import com.schoolofnet.helpdesk.models.Ticket;
 import com.schoolofnet.helpdesk.models.User;
 import com.schoolofnet.helpdesk.repository.InteractionRepository;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
 public class InteractionServiceImpl implements InteractionService {
 	
 	@Autowired
@@ -24,6 +21,13 @@ public class InteractionServiceImpl implements InteractionService {
 	
 	@Autowired
 	private UserService userService;
+
+	public InteractionServiceImpl(InteractionRepository interactionRepository, TicketService ticketService,
+			UserService userService) {
+		this.interactionRepository = interactionRepository;
+		this.ticketService = ticketService;
+		this.userService = userService;
+	}
 
 	@Override
 	public Interaction create(Interaction interaction,Long ticketId) {

@@ -8,14 +8,15 @@ import org.springframework.stereotype.Service;
 import com.schoolofnet.helpdesk.models.Role;
 import com.schoolofnet.helpdesk.repository.RolesRepository;
 
-import lombok.AllArgsConstructor;
-
 @Service
-@AllArgsConstructor
 public class RoleServiceImpl implements RoleService {
 	
 	@Autowired
 	private RolesRepository repository;
+
+	public RoleServiceImpl(RolesRepository repository) {
+		this.repository = repository;
+	}
 
 	@Override
 	public List<Role> findAll() {

@@ -15,9 +15,6 @@ import com.schoolofnet.helpdesk.models.User;
 import com.schoolofnet.helpdesk.repository.TicketRepository;
 import com.schoolofnet.helpdesk.repository.UserRepository;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 @Service
 public class TicketServiceImpl implements TicketService {
 	
@@ -27,13 +24,20 @@ public class TicketServiceImpl implements TicketService {
 	@Autowired
 	private UserRepository userRepository;
 
-	
 	@Autowired
 	private RoleService roleService;
 	
 	@Autowired
 	private UserService userService;
 	
+	public TicketServiceImpl(TicketRepository ticketRepository, UserRepository userRepository, RoleService roleService,
+			UserService userService) {
+		this.ticketRepository = ticketRepository;
+		this.userRepository = userRepository;
+		this.roleService = roleService;
+		this.userService = userService;
+	}
+
 	@Override
 	public List<Ticket> findAll() {
 		return (List<Ticket>) this.ticketRepository.findAll();

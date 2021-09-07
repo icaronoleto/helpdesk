@@ -15,15 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.schoolofnet.helpdesk.models.Interaction;
 import com.schoolofnet.helpdesk.services.InteractionService;
 
-import lombok.AllArgsConstructor;
-
 @RequestMapping("/tickets/{ticketId}/interactions")
 @Controller
-@AllArgsConstructor
 public class InteractionController {
 	
 	@Autowired
-	private InteractionService InteractionService;
+	private InteractionService interactionService;
+	
+	public InteractionController(InteractionService interactionService) {
+		this.interactionService = interactionService;
+	}
 
 	@PostMapping
 	public String save(
@@ -34,7 +35,7 @@ public class InteractionController {
 		if (bindingResult.hasErrors()) {
 			return "tickets/show";
 		}
-		this.InteractionService.create(interaction, ticketId);
+		this.interactionService.create(interaction, ticketId);
 		return "redirect:/tickets/" + ticketId;
 	}
 	
@@ -43,7 +44,7 @@ public class InteractionController {
 			@PathVariable("ticketId") Long ticketId,
 			@PathVariable("id") Long id,
 			Model model) {
-		this.InteractionService.delete(id, ticketId);
+		this.interactionService.delete(id, ticketId);
 		return "redirect:/tickets/" + ticketId;
 	}
 

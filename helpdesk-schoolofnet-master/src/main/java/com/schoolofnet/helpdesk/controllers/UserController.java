@@ -19,11 +19,8 @@ import com.schoolofnet.helpdesk.models.User;
 import com.schoolofnet.helpdesk.services.RoleService;
 import com.schoolofnet.helpdesk.services.UserService;
 
-import lombok.AllArgsConstructor;
-
 @Controller
 @RequestMapping("/users")
-@AllArgsConstructor
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
 	
@@ -32,6 +29,11 @@ public class UserController {
 	
 	@Autowired
 	private RoleService roleService;
+	
+	public UserController(UserService userService, RoleService roleService) {
+		this.userService = userService;
+		this.roleService = roleService;
+	}
     
     @GetMapping
     public String index(Model model) {
