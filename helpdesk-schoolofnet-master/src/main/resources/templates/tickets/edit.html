@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://thymeleaf.org/"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout/"
+	layout:decorate="~{layout}">
+	<th:block layout:fragment="content">
+		<div class="col-xs-12 col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<h4>Edit Ticket</h4>
+				</div>
+				<div class="card-block">
+					<form action="" th:action="@{/tickets/{id}(id=${ticket.id})}" th:object="${ticket}" th:method="put">
+						<input type="hidden" th:field="*{id}" />
+						
+						<div class="form-group">
+							<input type="text" th:field="*{name}" name="name" placeholder="Digite o nome do Ticket" class="form-control" />
+							<span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Ticket name error</span>
+						</div>
+		
+						<div class="form-group">
+							<textarea th:field="*{description}" name="description" placeholder="Digite descrição do Ticket" class="form-control">
+							</textarea>
+							<span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{lastName}">Ticket description error</span>
+						</div>
+						
+						<div class="form-group">
+							<select th:field="*{technician}" class="custom-select">
+								<option value="">Selecione uma opção</option>
+								<option th:each="user : ${users}"
+										th:value="${user.id}"
+										th:text="${user.name}">
+								</option>
+							</select>
+						</div>
+						
+						<div class="form-group" th:if="${interactionsCount > 0}">
+							<label class="custom-control custom-checkbox" th:if="${userLoggedIn.id == ticket.userOpen.id or userLoggedIn.roles[0] == 'ADMIN'}">
+								<input type="checkbox" class="custom-control-input" th:checked="${ticket.finished}"/>
+								<span class="custom-control-indicator"></span>
+								<span class="custom-control-description">Closed?</span>
+							</label>
+						</div>
+						
+						<div class="form-group" th:if="${interactionsCount == 0}">
+							<p class="text-danger">Need at leat one interaction to close this ticket</p>
+						</div>
+						
+						<div class="form-group">
+							<button type="submit" class="btn btn-primary" th:if="${userLoggedIn.id == ticket.userOpen.id or userLoggedIn.roles[0] == 'ADMIN'}">Save</button>
+							<a href="/tickets" class="btn btn-secondary">Back</a>
+						</div>
+					</form>				
+				</div>
+			</div>
+		</div>
+	</th:block>
+</html>

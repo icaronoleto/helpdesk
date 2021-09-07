@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://thymeleaf.org/"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout/"
+	layout:decorate="~{layout}">
+	<th:block layout:fragment="content">
+		<h5 class="mb-4">Listing Roles</h5>
+		<div class="col-xs-12 col-md-12 mb-4">
+			<a href="/roles/new" class="btn btn-success">Create</a>
+		</div>
+		<div class="col-xs-12 col-md-12">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Roles</th>				
+						<th>Actions</th>				
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="role : ${list}">
+						<td th:text="${role.id}"></td>
+						<td th:text="${role.name}"></td>
+						<td>
+							<form th:action="@{/roles/{id}(id = ${role.id})}" th:method="delete">
+								<button class="btn btn-danger">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</th:block>
+</html>
