@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://thymeleaf.org/"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout/"
+	layout:decorator="layout">
+
+	<th:block layout:fragment="content">
+		<div class="col-xs-12 col-md-12 text-center">
+			<div class="card">
+				<div class="card-header">
+					List all products
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-12 text-center">
+			<div class="card">
+				<div class="card-header">
+					Report
+				</div>
+				<div class="card-block">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${list}">
+                        <td th:text="${product.id}"></td>
+                        <td th:text="${product.name}"></td>
+                    </tr>
+                </tbody>
+            </table>
+				</div>
+			</div>
+		</div>		
+	</th:block>
+</html>

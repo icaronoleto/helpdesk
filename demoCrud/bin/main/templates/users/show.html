@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://thymeleaf.org/"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout/"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	layout:decorator="layout">
+
+	<th:block layout:fragment="content">
+		<div class="col-xs-12 col-md-12">			
+			<div class="card">
+				<div class="card-header">
+					user - <span th:text="${user.name}"></span>
+				</div>
+				<div class="card-block">
+					<ul class="list-group">
+						<li>
+							First Name: 
+							<span th:text="${user.name}"></span>
+						</li>
+						<li>
+							Last Name: 
+							<span th:text="${user.lastName}"></span>
+						</li>
+						<li>
+							Active: 
+							<div class="inline" th:switch="${user.active}">
+								<span th:case="${true}" class="badge badge-success" th:text="${user.active}"></span>
+								<span th:case="${false}" class="badge badge-danger" th:text="${user.active}"></span>
+							</div>
+						</li>
+						<li class="list-group-item">
+							Roles: 
+							<ol>
+								<div class="inline" th:each="role : ${user.roles}">
+									<span th:text="${role.name}"></span>,
+								</div>
+							</ol>
+						</li>
+					</ul>
+				</div>
+			</div>	
+			<a href="/users" class="btn btn-secondary">Back</a>
+		</div>
+	</th:block>
+</html>

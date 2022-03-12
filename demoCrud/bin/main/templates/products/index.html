@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html
+	xmlns:th="http://thymeleaf.org/"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout/"
+	layout:decorator="layout">
+
+	<th:block layout:fragment="content">
+		<div class="col-xs-12 col-md-12">
+			<a href="/products/new" class="btn btn-success">Create</a>
+		</div>
+		<div class="col-xs-12 col-md-12">
+			<h5 class="mt-4 mb-4">Listing products</h5>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Product name</th>
+						<th>Actions</th>				
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${list}">
+						<td th:text="${product.id}"></td>
+						<td th:text="${product.name}"></td>
+						<td>
+							<a th:href="@{/products/{id}(id = ${product.id})}" class="btn btn-secondary inline">See</a>
+							<a th:href="@{/products/edit/{id}(id = ${product.id})}" class="btn btn-info inline">Edit</a>
+							<form th:action="@{/products/d/{id}(id = ${product.id})}" th:method="post" class="inline">
+								<button class="btn btn-danger">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</th:block>
+</html>
